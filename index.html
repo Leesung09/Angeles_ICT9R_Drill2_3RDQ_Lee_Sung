@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            background-color: #b3d9ff; /* blueish background */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* full screen height */
+            margin: 0;
+        }
+        .calculator {
+            background-color: white;
+            width: 420px; /* bigger size */
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+        input, select {
+            width: 95%;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 18px;
+        }
+        button {
+            background-color: #007BFF; /* blue button */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: -5px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Basic Calculator</h1>
+        <input type="text" id="num1" placeholder="Enter number 1"><br>
+        <input type="text" id="num2" placeholder="Enter number 2"><br>
+        <div class="label">Select your operation</div>
+        <select id="operation">
+            <option value="add">Add</option>
+            <option value="sub">Subtract</option>
+            <option value="mul">Multiply</option>
+            <option value="div">Divide</option>
+        </select><br>
+        <button onclick="calculate()">Calculate</button>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        function calculate() {
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            let operation = document.getElementById("operation").value;
+
+            let result;
+
+            if (operation === "add") {
+                result = num1 + num2;
+            }
+            else if (operation === "sub") {
+                result = num1 - num2;
+            }
+            else if (operation === "mul") {
+                result = num1 * num2;
+            }
+            else if (operation === "div") {
+                if (num2 === 0) {
+                    alert("cannot divide by zero.");
+                    return;
+                }
+                result = num1 / num2;
+            }
+
+            document.getElementById("output").innerText = "Result: " + result;
+        }
+
+        // Allow pressing Enter to trigger calculation
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                calculate();
+            }
+        });
+    </script>
+</body>
+</html>
